@@ -4,10 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Rasmus/Documents/EASV/SCO/NetBeans/WordSearcher/src/wordsearcher/bll/WordManager.java</file>
-            <file>file:/C:/Users/Rasmus/Documents/EASV/SCO/NetBeans/WordSearcher/src/wordsearcher/gui/FXMLDocument.fxml</file>
-            <file>file:/C:/Users/Rasmus/Documents/EASV/SCO/NetBeans/WordSearcher/src/wordsearcher/gui/FXMLDocumentController.java</file>
+            <file>file:/C:/Users/Rasmus/Documents/EASV/SCO/NetBeans/WordSearcher/src/wordsearcher/gui/controller/FXMLDocumentController.java</file>
             <file>file:/C:/Users/Rasmus/Documents/EASV/SCO/NetBeans/WordSearcher/src/wordsearcher/WordSearcher.java</file>
+            <file>file:/C:/Users/Rasmus/Documents/EASV/SCO/NetBeans/WordSearcher/src/wordsearcher/gui/model/WordModel.java</file>
             <file>file:/C:/Users/Rasmus/Documents/EASV/SCO/NetBeans/WordSearcher/src/wordsearcher/dal/WordDAO.java</file>
+            <file>file:/C:/Users/Rasmus/Documents/EASV/SCO/NetBeans/WordSearcher/src/wordsearcher/gui/view/FXMLDocument.fxml</file>
         </group>
     </open-files>
 </project-private>

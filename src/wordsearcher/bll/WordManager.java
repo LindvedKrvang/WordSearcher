@@ -6,6 +6,7 @@
 package wordsearcher.bll;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import wordsearcher.dal.WordDAO;
 
@@ -31,6 +32,28 @@ public class WordManager
     {
         List<String> allWords = wordDAO.getAllWords();        
         return allWords;
+    }
+    
+    /**
+     * Searches all items to see if any contains the search query.
+     * @param query The String being searched for.
+     * @return A List containg all words that macthed.
+     * @throws FileNotFoundException 
+     */
+    public List<String> beginSearch(String query) throws FileNotFoundException
+    {
+        List<String> macthingWords = new ArrayList<>();
+        List<String> allWords = wordDAO.getAllWords();
+        
+        for(int i = 0; i < allWords.size(); i++)
+        {
+            if(allWords.get(i).contains(query))
+            {
+                macthingWords.add(allWords.get(i));
+            }
+        }
+        
+        return macthingWords;
     }
     
 }
