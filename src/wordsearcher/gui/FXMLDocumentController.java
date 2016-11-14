@@ -3,11 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package wordsearcher;
+package wordsearcher.gui;
 
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
@@ -33,11 +36,17 @@ public class FXMLDocumentController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        List<String> allWords = wordManager.getAllWords();
-        for(String str : allWords)
+        try
         {
-            System.out.println(str);
-        }
-    }    
-    
+            List<String> allWords = wordManager.getAllWords();
+            for(int i = 0; i < allWords.size(); i++)
+            {
+                System.out.println(allWords.get(i) + "\n");
+            }
+        } 
+        catch (FileNotFoundException ex)
+        {
+            System.out.println(ex.getMessage());
+        }        
+    }   
 }

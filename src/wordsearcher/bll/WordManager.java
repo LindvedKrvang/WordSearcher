@@ -5,6 +5,7 @@
  */
 package wordsearcher.bll;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import wordsearcher.dal.WordDAO;
@@ -22,9 +23,11 @@ public class WordManager
         wordDAO = new WordDAO();
     }
 
-    public List<String> getAllWords()
+    public List<String> getAllWords() throws FileNotFoundException
     {
         List<String> allWords = wordDAO.getAllWords();
+        
+        
         return allWords;
     }
     
