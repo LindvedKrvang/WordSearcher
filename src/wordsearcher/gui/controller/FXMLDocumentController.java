@@ -3,18 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package wordsearcher.gui;
+package wordsearcher.gui.controller;
 
 import java.io.FileNotFoundException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
-import wordsearcher.bll.WordManager;
+import wordsearcher.gui.model.WordModel;
 
 /**
  *
@@ -26,11 +23,11 @@ public class FXMLDocumentController implements Initializable
     @FXML
     private ListView lstWords;
     
-    private WordManager wordManager;
+    private WordModel wordModel;
     
     public FXMLDocumentController()
     {
-        wordManager = new WordManager();
+        wordModel = new WordModel();
     }
     
     @Override
@@ -38,15 +35,12 @@ public class FXMLDocumentController implements Initializable
     {
         try
         {
-            List<String> allWords = wordManager.getAllWords();
-            for(int i = 0; i < allWords.size(); i++)
-            {
-                System.out.println(allWords.get(i) + "\n");
-            }
+            lstWords.setItems(wordModel.getWords());
+            wordModel.reset();      
         } 
         catch (FileNotFoundException ex)
         {
             System.out.println(ex.getMessage());
-        }        
+        }
     }   
 }
