@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="511.0" prefWidth="495.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wordsearcher.gui.controller.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="519.0" prefWidth="495.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wordsearcher.gui.controller.FXMLDocumentController">
    <children>
       <Pane layoutX="14.0" layoutY="14.0" prefHeight="490.0" prefWidth="308.0">
          <children>
@@ -62,6 +62,7 @@
                   <Insets left="5.0" right="5.0" top="5.0" />
                </padding>
             </VBox>
+            <Button layoutX="84.0" layoutY="459.0" mnemonicParsing="false" onAction="#handleCloseButton" prefHeight="31.0" prefWidth="64.0" text="Close" />
          </children>
       </Pane>
    </children>

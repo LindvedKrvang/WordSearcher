@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,8 +39,6 @@ public class FXMLDocumentController implements Initializable
     private Label lblCount;
     @FXML
     private RadioButton rbtnBeginsWith;
-    @FXML
-    private ToggleGroup SearchType;
     @FXML
     private RadioButton rbtnContains;
     @FXML
@@ -192,5 +191,15 @@ public class FXMLDocumentController implements Initializable
             }
         }
         return amountToShow;
+    }
+    
+    /**
+     * Terminates the program.
+     * @param event 
+     */
+    @FXML
+    private void handleCloseButton(ActionEvent event)
+    {
+        Platform.exit();
     }
 }
