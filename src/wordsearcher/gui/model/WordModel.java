@@ -61,7 +61,7 @@ public class WordModel
             {
                 List<String> searchResult = wordManager.beginSearch(query);
                 ITEMS.clear();
-                if(limitation != 0)
+                if(limitation != 0 && !searchResult.isEmpty())
                 {
                     for(int i = 0; i < limitation; i++)
                     {
@@ -78,7 +78,7 @@ public class WordModel
             {
                 List<String> searchResult = wordManager.containSearch(query);
                 ITEMS.clear();
-                if(limitation != 0)
+                if(limitation != 0 && !searchResult.isEmpty())
                 {
                     for(int i = 0; i < limitation; i++)
                     {
@@ -95,7 +95,7 @@ public class WordModel
             {
                 List<String> searchResult = wordManager.endsSearch(query);
                 ITEMS.clear();
-                if(limitation != 0)
+                if(limitation != 0 && !searchResult.isEmpty())
                 {
                     for(int i = 0; i < limitation; i++)
                     {
@@ -112,7 +112,7 @@ public class WordModel
             {
                 List<String> searchResult = wordManager.exactSearch(query);
                 ITEMS.clear();
-                if(limitation != 0)
+                if(limitation != 0 && !searchResult.isEmpty())
                 {
                     for(int i = 0; i < limitation; i++)
                     {
