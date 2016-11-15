@@ -49,12 +49,41 @@ public class WordModel
     /**
      * Searches the wordbase for words beginning with the given query.
      * @param query The String to search for.
+     * @param selectedRadioButton The radioButton seleceted as an int.
      * @throws java.io.FileNotFoundException
      */
-    public void doSearch(String query) throws FileNotFoundException
+    public void doSearch(String query, int selectedRadioButton) throws FileNotFoundException
     {
-        List<String> searchResult = wordManager.beginSearch(query);
-        ITEMS.clear();
-        ITEMS.addAll(searchResult);
+        switch(selectedRadioButton)
+        {
+            case 1:
+            {
+                List<String> searchResult = wordManager.beginSearch(query);
+                ITEMS.clear();
+                ITEMS.addAll(searchResult);
+                break;
+            }
+            case 2:
+            {
+                List<String> searchResult = wordManager.containSearch(query);
+                ITEMS.clear();
+                ITEMS.addAll(searchResult);
+                break;
+            }
+            case 3:
+            {
+                List<String> searchResult = wordManager.endsSearch(query);
+                ITEMS.clear();
+                ITEMS.addAll(searchResult);
+                break;
+            }
+            case 4:
+            {
+                List<String> searchResult = wordManager.exactSearch(query);
+                ITEMS.clear();
+                ITEMS.addAll(searchResult);
+                break;
+            }
+        }        
     }
 }

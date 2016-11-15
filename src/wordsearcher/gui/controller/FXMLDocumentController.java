@@ -14,7 +14,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import wordsearcher.gui.model.WordModel;
 
 /**
@@ -31,6 +33,16 @@ public class FXMLDocumentController implements Initializable
     private TextField txtQuery;
     @FXML
     private Label lblCount;
+    @FXML
+    private RadioButton rbtnBeginsWith;
+    @FXML
+    private ToggleGroup SearchType;
+    @FXML
+    private RadioButton rbtnContains;
+    @FXML
+    private RadioButton rbtnEndsWith;
+    @FXML
+    private RadioButton rbtnExact;
     
     public FXMLDocumentController()
     {
@@ -63,7 +75,7 @@ public class FXMLDocumentController implements Initializable
         try
         {
             String query = txtQuery.getText();
-            wordModel.doSearch(query);
+            wordModel.doSearch(query, getSelectedSearch());
             updateCount();
         } 
         catch (FileNotFoundException ex)
@@ -92,9 +104,34 @@ public class FXMLDocumentController implements Initializable
     }
     
     /**
+     * Checks which radioButton that has been selected and parses it as an int.
+     * @return The selected button as an int.
+     */
+    private int getSelectedSearch()
+    {
+        int selectedSearch = 0;
+        if(rbtnBeginsWith.isSelected())
+        {
+            selectedSearch = 1;
+        }
+        if(rbtnContains.isSelected())
+        {
+            selectedSearch = 2;
+        }
+        if(rbtnEndsWith.isSelected())
+        {
+            selectedSearch = 3;
+        }
+        if(rbtnExact.isSelected())
+        {
+            selectedSearch = 4;
+        }
+        return selectedSearch;
+    }
+    
+    /**
      * Updates the Count label with the amount of words displayed.
      */
-    @FXML
     private void updateCount()
     {
         List<String> wordsList = wordModel.getWords();

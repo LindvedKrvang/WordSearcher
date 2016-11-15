@@ -40,7 +40,7 @@ public class WordManager
      * @return A List containg all words that macthed.
      * @throws FileNotFoundException 
      */
-    public List<String> beginSearch(String query) throws FileNotFoundException
+    public List<String> containSearch(String query) throws FileNotFoundException
     {
         List<String> macthingWords = new ArrayList<>();
         List<String> allWords = wordDAO.getAllWords();
@@ -54,6 +54,69 @@ public class WordManager
         }
         
         return macthingWords;
+    }
+    
+    /**
+     * Searches all Items to see if any starts with the query.
+     * @param query The query to search for as String.
+     * @return A List with all macthing Items.
+     * @throws FileNotFoundException 
+     */
+    public List<String> beginSearch(String query) throws FileNotFoundException
+    {
+        List<String> matchingWords = new ArrayList<>();
+        List<String> allWords = wordDAO.getAllWords();
+        
+        for(int i = 0; i < allWords.size(); i++)
+        {
+            if(allWords.get(i).startsWith(query))
+            {
+                matchingWords.add(allWords.get(i));
+            }
+        }
+        return matchingWords;
+    }
+    
+    /**
+     * Searches all Items to see if any ends with the query.
+     * @param query The query to search for as String.
+     * @return A List with all macthing Items.
+     * @throws FileNotFoundException 
+     */
+    public List<String> endsSearch(String query) throws FileNotFoundException
+    {
+        List<String> matchingWords = new ArrayList<>();
+        List<String> allWords = wordDAO.getAllWords();
+        
+        for(int i = 0; i < allWords.size(); i++)
+        {
+            if(allWords.get(i).endsWith(query))
+            {
+                matchingWords.add(allWords.get(i));
+            }
+        }
+        return matchingWords;
+    }
+    
+    /**
+     * Searches all Items to see if any ends with the query.
+     * @param query The query to search for as String.
+     * @return A List with all macthing Items.
+     * @throws FileNotFoundException 
+     */
+    public List<String> exactSearch(String query) throws FileNotFoundException
+    {
+        List<String> matchingWords = new ArrayList<>();
+        List<String> allWords = wordDAO.getAllWords();
+        
+        for(int i = 0; i < allWords.size(); i++)
+        {
+            if(allWords.get(i).equals(query))
+            {
+                matchingWords.add(allWords.get(i));
+            }
+        }
+        return matchingWords;
     }
     
 }
