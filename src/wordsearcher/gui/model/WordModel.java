@@ -65,7 +65,10 @@ public class WordModel
                 {
                     for(int i = 0; i < limitation; i++)
                     {
-                        ITEMS.add(searchResult.get(i));
+                        if(i < searchResult.size())
+                        {
+                           ITEMS.add(searchResult.get(i)); 
+                        }
                     }
                 }
                 else
@@ -82,7 +85,10 @@ public class WordModel
                 {
                     for(int i = 0; i < limitation; i++)
                     {
-                        ITEMS.add(searchResult.get(i));
+                        if(i < searchResult.size())
+                        {
+                           ITEMS.add(searchResult.get(i)); 
+                        }
                     }
                 }
                 else
@@ -99,7 +105,10 @@ public class WordModel
                 {
                     for(int i = 0; i < limitation; i++)
                     {
-                        ITEMS.add(searchResult.get(i));
+                        if(i < searchResult.size())
+                        {
+                           ITEMS.add(searchResult.get(i)); 
+                        }
                     }
                 }
                 else
@@ -116,7 +125,10 @@ public class WordModel
                 {
                     for(int i = 0; i < limitation; i++)
                     {
-                        ITEMS.add(searchResult.get(i));
+                        if(i < searchResult.size())
+                        {
+                           ITEMS.add(searchResult.get(i)); 
+                        }
                     }
                 }
                 else
