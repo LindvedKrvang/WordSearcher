@@ -43,16 +43,17 @@ public class WordModel
     public void reset() throws FileNotFoundException
     {
         ITEMS.clear();
-        ITEMS.addAll(wordManager.getAllWords());
+        ITEMS.addAll(wordManager.getAllWords());        
     }
     
     /**
      * Searches the wordbase for words beginning with the given query.
      * @param query The String to search for.
      * @param selectedRadioButton The radioButton seleceted as an int.
+     * @param limitation The limit that is allowed to be shown.
      * @throws java.io.FileNotFoundException
      */
-    public void doSearch(String query, int selectedRadioButton) throws FileNotFoundException
+    public void doSearch(String query, int selectedRadioButton, int limitation) throws FileNotFoundException
     {
         switch(selectedRadioButton)
         {
@@ -60,28 +61,68 @@ public class WordModel
             {
                 List<String> searchResult = wordManager.beginSearch(query);
                 ITEMS.clear();
-                ITEMS.addAll(searchResult);
+                if(limitation != 0)
+                {
+                    for(int i = 0; i < limitation; i++)
+                    {
+                        ITEMS.add(searchResult.get(i));
+                    }
+                }
+                else
+                {
+                    ITEMS.addAll(searchResult);
+                }                
                 break;
             }
             case 2:
             {
                 List<String> searchResult = wordManager.containSearch(query);
                 ITEMS.clear();
-                ITEMS.addAll(searchResult);
+                if(limitation != 0)
+                {
+                    for(int i = 0; i < limitation; i++)
+                    {
+                        ITEMS.add(searchResult.get(i));
+                    }
+                }
+                else
+                {
+                    ITEMS.addAll(searchResult);
+                } 
                 break;
             }
             case 3:
             {
                 List<String> searchResult = wordManager.endsSearch(query);
                 ITEMS.clear();
-                ITEMS.addAll(searchResult);
+                if(limitation != 0)
+                {
+                    for(int i = 0; i < limitation; i++)
+                    {
+                        ITEMS.add(searchResult.get(i));
+                    }
+                }
+                else
+                {
+                    ITEMS.addAll(searchResult);
+                } 
                 break;
             }
             case 4:
             {
                 List<String> searchResult = wordManager.exactSearch(query);
                 ITEMS.clear();
-                ITEMS.addAll(searchResult);
+                if(limitation != 0)
+                {
+                    for(int i = 0; i < limitation; i++)
+                    {
+                        ITEMS.add(searchResult.get(i));
+                    }
+                }
+                else
+                {
+                    ITEMS.addAll(searchResult);
+                } 
                 break;
             }
         }        

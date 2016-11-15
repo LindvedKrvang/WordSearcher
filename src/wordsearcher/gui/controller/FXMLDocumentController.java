@@ -9,9 +9,12 @@ import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
@@ -43,6 +46,10 @@ public class FXMLDocumentController implements Initializable
     private RadioButton rbtnEndsWith;
     @FXML
     private RadioButton rbtnExact;
+    @FXML
+    private CheckBox checkCase;
+    @FXML
+    private ComboBox<String> comboLimit;
     
     public FXMLDocumentController()
     {
@@ -53,6 +60,7 @@ public class FXMLDocumentController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        comboLimit.setItems(FXCollections.observableArrayList("None", "10", "20", "50", "100"));
         try
         {
             lstWords.setItems(wordModel.getWords());
@@ -75,7 +83,11 @@ public class FXMLDocumentController implements Initializable
         try
         {
             String query = txtQuery.getText();
-            wordModel.doSearch(query, getSelectedSearch());
+            if(!checkCase.isSelected()) //If Case sensitive is not selected, make the query to allLowerCase.
+            {
+                query = query.toLowerCase();
+            }
+            wordModel.doSearch(query, getSelectedSearch(), checkLimit());
             updateCount();
         } 
         catch (FileNotFoundException ex)
@@ -141,5 +153,44 @@ public class FXMLDocumentController implements Initializable
             amountOfWords++;
         }
         lblCount.setText("Count: " + amountOfWords);
+    }
+
+    /**
+     * Checks if a limitation has been selected and returns the limit.
+     * @return The limit to return as int.
+     */
+    private int checkLimit()
+    {
+        int amountToShow = 0; //If no limit is set, show 100.000.
+        int selectedIndex = comboLimit.getSelectionModel().getSelectedIndex();
+        switch(selectedIndex)
+        {
+            case 0:
+            {
+                amountToShow = 0;
+                break;
+            }
+            case 1:
+            {
+                amountToShow = 10;
+                break;
+            }
+            case 2:
+            {
+                amountToShow = 20;
+                break;
+            }
+            case 3:
+            {
+                amountToShow = 50;
+                break;
+            }
+            case 4:
+            {
+                amountToShow = 100;
+                break;
+            }
+        }
+        return amountToShow;
     }
 }
