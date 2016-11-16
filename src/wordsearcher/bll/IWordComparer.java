@@ -11,5 +11,5 @@ package wordsearcher.bll;
  */
 public interface IWordComparer
 {
-    
+    public boolean compare(String word);
 }

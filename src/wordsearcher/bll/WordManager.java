@@ -34,89 +34,20 @@ public class WordManager
         return allWords;
     }
     
-    /**
-     * Searches all items to see if any contains the search query.
-     * @param query The String being searched for.
-     * @return A List containg all words that macthed.
-     * @throws FileNotFoundException 
-     */
-    public List<String> containSearch(String query) throws FileNotFoundException
+    public List<String> search(IWordComparer comparer) throws FileNotFoundException
     {
         List<String> macthingWords = new ArrayList<>();
         List<String> allWords = getAllWords();
         
-        for(int i = 0; i < allWords.size(); i++)
+        for(String word : allWords)
         {
-            if(allWords.get(i).contains(query))
+            if(comparer.compare(word))
             {
-                macthingWords.add(allWords.get(i));
+                macthingWords.add(word);
             }
         }
         
         return macthingWords;
-    }
-    
-    /**
-     * Searches all Items to see if any starts with the query.
-     * @param query The query to search for as String.
-     * @return A List with all macthing Items.
-     * @throws FileNotFoundException 
-     */
-    public List<String> beginSearch(String query) throws FileNotFoundException
-    {
-        List<String> matchingWords = new ArrayList<>();
-        List<String> allWords = getAllWords();
-        
-        for(int i = 0; i < allWords.size(); i++)
-        {
-            if(allWords.get(i).startsWith(query))
-            {
-                matchingWords.add(allWords.get(i));
-            }
-        }
-        return matchingWords;
-    }
-    
-    /**
-     * Searches all Items to see if any ends with the query.
-     * @param query The query to search for as String.
-     * @return A List with all macthing Items.
-     * @throws FileNotFoundException 
-     */
-    public List<String> endsSearch(String query) throws FileNotFoundException
-    {
-        List<String> matchingWords = new ArrayList<>();
-        List<String> allWords = getAllWords();
-        
-        for(int i = 0; i < allWords.size(); i++)
-        {
-            if(allWords.get(i).endsWith(query))
-            {
-                matchingWords.add(allWords.get(i));
-            }
-        }
-        return matchingWords;
-    }
-    
-    /**
-     * Searches all Items to see if any ends with the query.
-     * @param query The query to search for as String.
-     * @return A List with all macthing Items.
-     * @throws FileNotFoundException 
-     */
-    public List<String> exactSearch(String query) throws FileNotFoundException
-    {
-        List<String> matchingWords = new ArrayList<>();
-        List<String> allWords = getAllWords();
-        
-        for(int i = 0; i < allWords.size(); i++)
-        {
-            if(allWords.get(i).equals(query))
-            {
-                matchingWords.add(allWords.get(i));
-            }
-        }
-        return matchingWords;
     }
     
     /**
@@ -134,25 +65,25 @@ public class WordManager
         {
             case 1:
             {
-                searchResult = beginSearch(query);
+                searchResult = search(new BeginsWithSearch(query));
                 updateITEMS(searchResult, limitation, ITEMS);              
                 break;
             }
             case 2:
             {
-                searchResult = containSearch(query);
+                searchResult = search(new ContainsSearch(query));
                 updateITEMS(searchResult, limitation, ITEMS);
                 break;
             }
             case 3:
             {
-                searchResult = endsSearch(query);
+                searchResult = search(new EndsWithSearch(query));
                 updateITEMS(searchResult, limitation, ITEMS);
                 break;
             }
             case 4:
             {
-                searchResult = exactSearch(query);
+                searchResult = search(new ExactSearch(query));
                 updateITEMS(searchResult, limitation, ITEMS);
                 break;
             }
