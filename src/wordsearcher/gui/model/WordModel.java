@@ -6,7 +6,6 @@
 package wordsearcher.gui.model;
 
 import java.io.FileNotFoundException;
-import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import wordsearcher.bll.WordManager;
@@ -44,99 +43,5 @@ public class WordModel
     {
         ITEMS.clear();
         ITEMS.addAll(wordManager.getAllWords());        
-    }
-    
-    /**
-     * Searches the wordbase for words beginning with the given query.
-     * @param query The String to search for.
-     * @param selectedRadioButton The radioButton seleceted as an int.
-     * @param limitation The limit that is allowed to be shown.
-     * @throws java.io.FileNotFoundException
-     */
-    public void doSearch(String query, int selectedRadioButton, int limitation) throws FileNotFoundException
-    {
-        switch(selectedRadioButton)
-        {
-            case 1:
-            {
-                List<String> searchResult = wordManager.beginSearch(query);
-                ITEMS.clear();
-                if(limitation != 0 && !searchResult.isEmpty())
-                {
-                    for(int i = 0; i < limitation; i++)
-                    {
-                        if(i < searchResult.size())
-                        {
-                           ITEMS.add(searchResult.get(i)); 
-                        }
-                    }
-                }
-                else
-                {
-                    ITEMS.addAll(searchResult);
-                }                
-                break;
-            }
-            case 2:
-            {
-                List<String> searchResult = wordManager.containSearch(query);
-                ITEMS.clear();
-                if(limitation != 0 && !searchResult.isEmpty())
-                {
-                    for(int i = 0; i < limitation; i++)
-                    {
-                        if(i < searchResult.size())
-                        {
-                           ITEMS.add(searchResult.get(i)); 
-                        }
-                    }
-                }
-                else
-                {
-                    ITEMS.addAll(searchResult);
-                } 
-                break;
-            }
-            case 3:
-            {
-                List<String> searchResult = wordManager.endsSearch(query);
-                ITEMS.clear();
-                if(limitation != 0 && !searchResult.isEmpty())
-                {
-                    for(int i = 0; i < limitation; i++)
-                    {
-                        if(i < searchResult.size())
-                        {
-                           ITEMS.add(searchResult.get(i)); 
-                        }
-                    }
-                }
-                else
-                {
-                    ITEMS.addAll(searchResult);
-                } 
-                break;
-            }
-            case 4:
-            {
-                List<String> searchResult = wordManager.exactSearch(query);
-                ITEMS.clear();
-                if(limitation != 0 && !searchResult.isEmpty())
-                {
-                    for(int i = 0; i < limitation; i++)
-                    {
-                        if(i < searchResult.size())
-                        {
-                           ITEMS.add(searchResult.get(i)); 
-                        }
-                    }
-                }
-                else
-                {
-                    ITEMS.addAll(searchResult);
-                } 
-                break;
-            }
-        }        
-    }
+    }    
 }

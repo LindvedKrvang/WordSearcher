@@ -20,16 +20,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import wordsearcher.bll.WordManager;
 import wordsearcher.gui.model.WordModel;
 
 /**
  *
  * @author Rasmus
  */
-public class FXMLDocumentController implements Initializable
+public class MainController implements Initializable
 {
     private WordModel wordModel;
+    private WordManager wordManager;
     
     @FXML
     private ListView lstWords;     
@@ -50,9 +51,10 @@ public class FXMLDocumentController implements Initializable
     @FXML
     private ComboBox<String> comboLimit;
     
-    public FXMLDocumentController()
+    public MainController()
     {
         wordModel = new WordModel();
+        wordManager = new WordManager();
     }
     
     
@@ -86,7 +88,7 @@ public class FXMLDocumentController implements Initializable
             {
                 query = query.toLowerCase();
             }
-            wordModel.doSearch(query, getSelectedSearch(), checkLimit());
+            wordManager.doSearch(query, getSelectedSearch(), checkLimit(), wordModel.getWords());
             updateCount();
         } 
         catch (FileNotFoundException ex)
@@ -160,7 +162,7 @@ public class FXMLDocumentController implements Initializable
      */
     private int checkLimit()
     {
-        int amountToShow = 0; //If no limit is set, show 100.000.
+        int amountToShow = 0; //If no limit is set, show all.
         int selectedIndex = comboLimit.getSelectionModel().getSelectedIndex();
         switch(selectedIndex)
         {

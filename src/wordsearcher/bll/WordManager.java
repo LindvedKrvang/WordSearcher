@@ -43,7 +43,7 @@ public class WordManager
     public List<String> containSearch(String query) throws FileNotFoundException
     {
         List<String> macthingWords = new ArrayList<>();
-        List<String> allWords = wordDAO.getAllWords();
+        List<String> allWords = getAllWords();
         
         for(int i = 0; i < allWords.size(); i++)
         {
@@ -65,7 +65,7 @@ public class WordManager
     public List<String> beginSearch(String query) throws FileNotFoundException
     {
         List<String> matchingWords = new ArrayList<>();
-        List<String> allWords = wordDAO.getAllWords();
+        List<String> allWords = getAllWords();
         
         for(int i = 0; i < allWords.size(); i++)
         {
@@ -86,7 +86,7 @@ public class WordManager
     public List<String> endsSearch(String query) throws FileNotFoundException
     {
         List<String> matchingWords = new ArrayList<>();
-        List<String> allWords = wordDAO.getAllWords();
+        List<String> allWords = getAllWords();
         
         for(int i = 0; i < allWords.size(); i++)
         {
@@ -107,7 +107,7 @@ public class WordManager
     public List<String> exactSearch(String query) throws FileNotFoundException
     {
         List<String> matchingWords = new ArrayList<>();
-        List<String> allWords = wordDAO.getAllWords();
+        List<String> allWords = getAllWords();
         
         for(int i = 0; i < allWords.size(); i++)
         {
@@ -119,4 +119,68 @@ public class WordManager
         return matchingWords;
     }
     
+    /**
+     * Searches the wordbase for words beginning with the given query.
+     * @param query The String to search for.
+     * @param selectedRadioButton The radioButton seleceted as an int.
+     * @param limitation The limit that is allowed to be shown.
+     * @param ITEMS The observableList the model is updated after.
+     * @throws java.io.FileNotFoundException
+     */
+    public void doSearch(String query, int selectedRadioButton, int limitation, List<String> ITEMS) throws FileNotFoundException
+    {
+        List<String> searchResult;
+        switch(selectedRadioButton)
+        {
+            case 1:
+            {
+                searchResult = beginSearch(query);
+                updateITEMS(searchResult, limitation, ITEMS);              
+                break;
+            }
+            case 2:
+            {
+                searchResult = containSearch(query);
+                updateITEMS(searchResult, limitation, ITEMS);
+                break;
+            }
+            case 3:
+            {
+                searchResult = endsSearch(query);
+                updateITEMS(searchResult, limitation, ITEMS);
+                break;
+            }
+            case 4:
+            {
+                searchResult = exactSearch(query);
+                updateITEMS(searchResult, limitation, ITEMS);
+                break;
+            }
+        }        
+    }
+    
+    /**
+     * Update the ITEMS List for the model.
+     * @param searchResult
+     * @param limitation
+     * @param ITEMS 
+     */
+    private void updateITEMS(List<String> searchResult, int limitation, List<String> ITEMS)
+    {
+        ITEMS.clear();
+        if(limitation != 0 && !searchResult.isEmpty())
+        {
+            for(int i = 0; i < limitation; i++)
+            {
+                if(i < searchResult.size())
+                {
+                    ITEMS.add(searchResult.get(i)); 
+                }
+            }
+        }
+        else
+        {
+            ITEMS.addAll(searchResult);
+        }
+    }
 }
