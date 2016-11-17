@@ -9,19 +9,22 @@ package wordsearcher.bll;
  *
  * @author Rasmus
  */
-public class EndsWithSearch implements IWordComparer
+public class EndsWithSearch extends QuerySearchTemplate
 {
-    private final String query;
-
-    public EndsWithSearch(String query)
+    public EndsWithSearch(String query, boolean caseSensitive)
     {
-        this.query = query;
-    }
-
+        super(query, caseSensitive);
+    }    
+    
     @Override
     public boolean compare(String word)
     {
-        return word.endsWith(query);
-    }
-    
+        if (caseSensitive) 
+        {
+            return word.endsWith(query);
+        } else 
+        {
+            return word.toLowerCase().contains(query.toLowerCase());
+        }
+    } 
 }

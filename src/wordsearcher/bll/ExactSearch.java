@@ -9,19 +9,22 @@ package wordsearcher.bll;
  *
  * @author Rasmus
  */
-public class ExactSearch implements IWordComparer
+public class ExactSearch extends QuerySearchTemplate
 {
-    private final String query;
-
-    public ExactSearch(String query)
+    public ExactSearch(String query, boolean caseSensitive)
     {
-        this.query = query;
-    }
-
+        super(query, caseSensitive);
+    }    
+    
     @Override
     public boolean compare(String word)
     {
-        return word.equals(query);
-    }
-    
+        if (caseSensitive) 
+        {
+            return word.equals(query);
+        } else 
+        {
+            return word.toLowerCase().contains(query.toLowerCase());
+        }
+    } 
 }

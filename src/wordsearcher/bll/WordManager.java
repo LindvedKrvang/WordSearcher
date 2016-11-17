@@ -53,37 +53,38 @@ public class WordManager
     /**
      * Searches the wordbase for words beginning with the given query.
      * @param query The String to search for.
-     * @param selectedRadioButton The radioButton seleceted as an int.
+     * @param selectedOption The radioButton seleceted as an int.
      * @param limitation The limit that is allowed to be shown.
      * @param ITEMS The observableList the model is updated after.
+     * @param isCaseSensitive
      * @throws java.io.FileNotFoundException
      */
-    public void doSearch(String query, int selectedRadioButton, int limitation, List<String> ITEMS) throws FileNotFoundException
+    public void doSearch(String query, int selectedOption, int limitation, List<String> ITEMS, boolean isCaseSensitive) throws FileNotFoundException
     {
         List<String> searchResult;
-        switch(selectedRadioButton)
+        switch(selectedOption)
         {
-            case 1:
+            case 1: //Search for all that begins with.
             {
-                searchResult = search(new BeginsWithSearch(query));
+                searchResult = search(new BeginsWithSearch(query, isCaseSensitive));
                 updateITEMS(searchResult, limitation, ITEMS);              
                 break;
             }
-            case 2:
+            case 2: //Search for all the contains.
             {
-                searchResult = search(new ContainsSearch(query));
+                searchResult = search(new ContainsSearch(query, isCaseSensitive));
                 updateITEMS(searchResult, limitation, ITEMS);
                 break;
             }
-            case 3:
+            case 3: //Search for all that ends with.
             {
-                searchResult = search(new EndsWithSearch(query));
+                searchResult = search(new EndsWithSearch(query, isCaseSensitive));
                 updateITEMS(searchResult, limitation, ITEMS);
                 break;
             }
-            case 4:
+            case 4: //Search for all exact.
             {
-                searchResult = search(new ExactSearch(query));
+                searchResult = search(new ExactSearch(query, isCaseSensitive));
                 updateITEMS(searchResult, limitation, ITEMS);
                 break;
             }
