@@ -9,22 +9,20 @@ package wordsearcher.bll;
  *
  * @author Rasmus
  */
-public class BeginsWithSearch extends QuerySearchTemplate
+public class BeginsWithSearch implements IWordComparer
 {
-    public BeginsWithSearch(String query, boolean caseSensitive)
+    private final String query;
+
+    public BeginsWithSearch(String query)
     {
-        super(query, caseSensitive);
-    }    
+        this.query = query;
+    }
+    
     
     @Override
     public boolean compare(String word)
     {
-        if (caseSensitive) 
-        {
-            return word.startsWith(query);
-        } else 
-        {
-            return word.toLowerCase().contains(query.toLowerCase());
-        }
-    }    
+        return word.startsWith(query);
+    }
+    
 }

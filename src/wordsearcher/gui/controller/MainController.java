@@ -20,10 +20,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import wordsearcher.bll.BeginsWithSearch;
-import wordsearcher.bll.ContainsSearch;
-import wordsearcher.bll.EndsWithSearch;
-import wordsearcher.bll.ExactSearch;
 import wordsearcher.bll.WordManager;
 import wordsearcher.gui.model.WordModel;
 
@@ -88,7 +84,11 @@ public class MainController implements Initializable
         try
         {
             String query = txtQuery.getText();
-            wordManager.doSearch(query, getSelectedSearch(), checkLimit(), wordModel.getWords(), checkCase.isSelected());
+            if(!checkCase.isSelected()) //If Case sensitive is not selected, make the query to allLowerCase.
+            {
+                query = query.toLowerCase();
+            }
+            wordManager.doSearch(query, getSelectedSearch(), checkLimit(), wordModel.getWords());
             updateCount();
         } 
         catch (FileNotFoundException ex)
@@ -115,72 +115,6 @@ public class MainController implements Initializable
             System.out.println(ex.getMessage());
         }
     }
-    
-//    /**
-//     * Searches the wordbase for words beginning with the given query.
-//     * @param query The String to search for.
-//     * @param selectedOption The radioButton seleceted as an int.
-//     * @param limitation The limit that is allowed to be shown.
-//     * @param ITEMS The observableList the model is updated after.
-//     * @throws java.io.FileNotFoundException
-//     */
-//    public void doSearch(String query, int selectedOption, int limitation, List<String> ITEMS) throws FileNotFoundException
-//    {
-//        List<String> searchResult;
-//        boolean isCaseSensitive = checkCase.isSelected();
-//        switch(selectedOption)
-//        {
-//            case 1: //Search for all that begins with.
-//            {
-//                searchResult = wordManager.search(new BeginsWithSearch(query, isCaseSensitive));
-//                updateITEMS(searchResult, limitation, ITEMS);              
-//                break;
-//            }
-//            case 2: //Search for all the contains.
-//            {
-//                searchResult = wordManager.search(new ContainsSearch(query, isCaseSensitive));
-//                updateITEMS(searchResult, limitation, ITEMS);
-//                break;
-//            }
-//            case 3: //Search for all that ends with.
-//            {
-//                searchResult = wordManager.search(new EndsWithSearch(query, isCaseSensitive));
-//                updateITEMS(searchResult, limitation, ITEMS);
-//                break;
-//            }
-//            case 4: //Search for all exact.
-//            {
-//                searchResult = wordManager.search(new ExactSearch(query, isCaseSensitive));
-//                updateITEMS(searchResult, limitation, ITEMS);
-//                break;
-//            }
-//        }        
-//    }
-    
-//    /**
-//     * Update the ITEMS List for the model.
-//     * @param searchResult
-//     * @param limitation
-//     * @param ITEMS 
-//     */
-//    private void updateITEMS(List<String> searchResult, int limitation, List<String> ITEMS)
-//    {
-//        ITEMS.clear();
-//        if(limitation != 0 && !searchResult.isEmpty())
-//        {
-//            for(int i = 0; i < limitation; i++)
-//            {
-//                if(i < searchResult.size())
-//                {
-//                    ITEMS.add(searchResult.get(i)); 
-//                }
-//            }
-//        }
-//        else
-//        {
-//            ITEMS.addAll(searchResult);
-//        }
-//    }
     
     /**
      * Checks which radioButton that has been selected and parses it as an int.
